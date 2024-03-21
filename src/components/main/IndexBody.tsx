@@ -1,10 +1,13 @@
 'use client'
+import { fetchCity } from "@/lib/fetchApi";
 import WeatherCard from "./cards/WeatherCard";
 import Searchbar from "./inputs/Searchbar";
 import { useEffect, useState } from "react";
 
 const exampleCity = {
     name: 'Buenos Aires',
+    latitud: 20,
+    longitud: 20,
     temperature: 19,
     description: 'nublado',
     humidity: 20,
@@ -17,7 +20,13 @@ const Indexbody = () => {
 
     useEffect(() => {
         //Query backend with city name
-        searchValue !== null ? setCity(exampleCity) : setCity(undefined)
+        // searchValue !== null ? setCity(exampleCity) : setCity(undefined)
+        if(searchValue !== null) {
+            fetchCity(searchValue).then((res) => setCity(res.data))
+        } 
+        else {
+            setCity(undefined);
+        }
     }, [searchValue]);
 
     return (
