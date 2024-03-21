@@ -1,3 +1,4 @@
+import { farenhToCels } from "@/utils/farnheitToCelsius";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -63,7 +64,7 @@ export async function GET(req: NextRequest) {
           name: weatherData.data.name,
           longitud: weatherData.data.coord.lon,
           latitud: weatherData.data.coord.lat,
-          temperature: weatherData.data.main.temp,
+          temperature: farenhToCels(weatherData.data.main.temp),
           description: weatherData.data.weather[0].main,
           humidity: weatherData.data.main.humidity,
           wind: weatherData.data.wind.speed
