@@ -5,5 +5,5 @@
  */
 export const farenhToCels = (degrees: number) => {
     const celcius = 5/9 * (degrees - 32);
-    return celcius;
+    return Math.round(celcius);
 }
