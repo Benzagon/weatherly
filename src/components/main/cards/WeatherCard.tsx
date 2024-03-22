@@ -9,12 +9,13 @@ interface Props {
 
 const WeatherCard = ({city}: Props) => {
     const {favorites, setFavorites} = useGlobalContext();
+
     const handleFavorite = (city: City) => {
-        if(!favorites.includes(city)){
+        if(!favorites.find(e => e.name === city.name)){ // -> If doesnt already exist
             setFavorites([...favorites, city]);
         }
-        console.log(favorites);
     }
+
     return (
         <div className='w-80 h-72'>
             {city && (
@@ -24,7 +25,7 @@ const WeatherCard = ({city}: Props) => {
                     <Typography level="body-sm">{city.longitud + ' - ' + city.latitud}</Typography>
                     <IconButton
                         onClick={() => {handleFavorite(city)}}
-                        aria-label="bookmark Bahamas Islands"
+                        aria-label="Mark favorite city"
                         variant="plain"
                         color="neutral"
                         size="sm"

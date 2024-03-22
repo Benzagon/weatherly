@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
     const apiHost = process.env.X_RapidAPI_Host;
     try {
         /// TO NOT WASTE API CALLS
+        
         // const response = await fetch(`https://open-weather13.p.rapidapi.com/city/${cityName}`, {
         //   headers: {
         //     'X-RapidAPI-Key': apiKey || '',
