@@ -1,6 +1,7 @@
 import { Button, CardContent, IconButton, Typography } from '@mui/joy';
 import Card from '@mui/joy/Card';
-import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useGlobalContext } from '@/app/Context/store';
 import { useEffect, useState } from 'react';
 
@@ -25,6 +26,7 @@ const WeatherCard = ({city}: Props) => {
         if(!isFavorite){ // -> If doesnt already exist
             setFavorites([...favorites, city]);
             setIsFavorite(true);
+            return
         }
     }
 
@@ -43,7 +45,7 @@ const WeatherCard = ({city}: Props) => {
                         size="sm"
                         sx={{ position: 'absolute', top: '0.875rem', right: '0.5rem' }}
                         >
-                        <BookmarkAdd />
+                        {isFavorite ? <BookmarkAddedIcon /> : <BookmarkBorderIcon />}
                     </IconButton>
                 </div>
                 <CardContent orientation="horizontal">
