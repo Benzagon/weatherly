@@ -2,17 +2,29 @@ import { Button, CardContent, IconButton, Typography } from '@mui/joy';
 import Card from '@mui/joy/Card';
 import BookmarkAdd from '@mui/icons-material/BookmarkAdd';
 import { useGlobalContext } from '@/app/Context/store';
+import { useEffect, useState } from 'react';
 
 interface Props {
-    city: City | undefined
+    city: City
 }
 
 const WeatherCard = ({city}: Props) => {
     const {favorites, setFavorites} = useGlobalContext();
+    const [isFavorite, setIsFavorite] = useState<boolean>();
+    
+    //Check if city is favorite
+    useEffect(() => {
+        if(favorites.find(e => e.name === city.name)){
+            setIsFavorite(true);
+            return
+        }
+        setIsFavorite(false)
+    },[city]);
 
     const handleFavorite = (city: City) => {
-        if(!favorites.find(e => e.name === city.name)){ // -> If doesnt already exist
+        if(!isFavorite){ // -> If doesnt already exist
             setFavorites([...favorites, city]);
+            setIsFavorite(true);
         }
     }
 
@@ -34,14 +46,6 @@ const WeatherCard = ({city}: Props) => {
                         <BookmarkAdd />
                     </IconButton>
                 </div>
-                {/* <AspectRatio minHeight="120px" maxHeight="200px">
-                    <img
-                    src="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286"
-                    srcSet="https://images.unsplash.com/photo-1527549993586-dff825b37782?auto=format&fit=crop&w=286&dpr=2 2x"
-                    loading="lazy"
-                    alt=""
-                    />
-                </AspectRatio> */}
                 <CardContent orientation="horizontal">
                     <div>
                     <Typography level="body-xs">Current temperature:</Typography>
@@ -53,7 +57,6 @@ const WeatherCard = ({city}: Props) => {
                     variant="solid"
                     size="md"
                     color="primary"
-                    aria-label="Explore Bahamas Islands"
                     sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
                     >
                     Explore

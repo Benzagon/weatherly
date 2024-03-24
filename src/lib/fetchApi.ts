@@ -3,3 +3,17 @@ export const fetchCity = async (name: string) => {
     if(!res.ok) throw new Error('Failed to fetch city weather data');
     return await res.json();
 }
+
+//fetchFavorites
+export const getFavorites = async (localFavorites: string[]) => {
+    const favorites = localFavorites.map(async (name) => {
+        try {
+            const cityData = await fetchCity(name);
+            return cityData.data;
+        } catch (error) {
+            console.error('Error fetching city data:', error);
+            throw error;
+        }
+    });
+    return Promise.all(favorites); // Wait for all promises to resolve
+};

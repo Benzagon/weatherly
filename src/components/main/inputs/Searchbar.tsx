@@ -14,17 +14,19 @@ interface Props {
 
 const Searchbar = ({searchValue, setSearchValue}: Props) => {
     return (
-        <Autocomplete 
-            value={searchValue}
-            onChange={(event: any, newValue: string | null) => {
-                setSearchValue(newValue);
-            }}
-            fullWidth={true}
-            disablePortal
-            id="combo-box-demo"
-            options={top100Films}
-            renderInput={(params) => <TextField {...params} label="Search for a city..." />}
-        />
+        <div className="w-80">
+            <Autocomplete 
+                value={searchValue}
+                onChange={(event: any, newValue: string | null) => {
+                    setSearchValue(newValue);
+                }}
+                fullWidth={true}
+                disablePortal
+                id="combo-box-demo"
+                options={top100Films}
+                renderInput={(params) => <TextField {...params} label="Search for a city..." />}
+            />
+        </div>
     );
 };
 

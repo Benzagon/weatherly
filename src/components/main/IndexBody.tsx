@@ -19,9 +19,9 @@ const Indexbody = () => {
     }, [searchValue]);
 
     return (
-        <div className='w-fit grid gap-6'>
+        <div className='w-fit grid gap-6 justify-start'>
             <Searchbar searchValue={searchValue} setSearchValue={setSearchValue}></Searchbar>
-            <WeatherCard city={city}></WeatherCard>
+            {city && <WeatherCard city={city}></WeatherCard>}
         </div>
     );
 };
