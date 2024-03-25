@@ -16,20 +16,20 @@ const WeatherCard = ({city}: Props) => {
     
     //Check if city is favorite
     useEffect(() => {
-        if(favorites.find(e => e.name === city.name)){
+        if(favorites.find(e => e === city.name)){
             setIsFavorite(true);
             return
         }
         setIsFavorite(false)
     },[city]);
 
-    const handleFavorite = (city: City) => {
+    const handleFavorite = (city: string) => {
         if(!isFavorite){
             setFavorites([...favorites, city]);
             setIsFavorite(true);
         }
         else {
-            const deletedFavorites = favorites.filter((obj) => removeCity(city.name, obj.name));
+            const deletedFavorites = favorites.filter((name) => removeCity(city, name));
             setFavorites(deletedFavorites);
             setIsFavorite(false);
         }
@@ -43,7 +43,7 @@ const WeatherCard = ({city}: Props) => {
                     <Typography level="title-lg">{city.name}</Typography>
                     <Typography level="body-sm">{city.longitud + ' - ' + city.latitud}</Typography>
                     <IconButton
-                        onClick={() => {handleFavorite(city)}}
+                        onClick={() => {handleFavorite(city.name)}}
                         aria-label="Mark favorite city"
                         variant="plain"
                         color="neutral"
