@@ -1,6 +1,7 @@
 'use client';
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { getFavorites } from "@/lib/fetchApi";
+import { compareLocalToContext, removeCity } from "@/utils/cityFunctions";
 import React, { createContext, useContext, Dispatch, SetStateAction, useState, useEffect } from "react";
 
 interface ContextProps {
@@ -17,17 +18,22 @@ export const GlobalContextProvider = ({ children }: Readonly<{children: React.Re
     const [localFavorites, setLocalFavorites] = useLocalStorage('FAVORITE_CITIES', []);
     const [favorites, setFavorites] = useState<[] | City[]>([]);
 
-    useEffect(() => { // Mount favorites with current data
+    useEffect(() => { // Mount context favorites with locally stored data
         getFavorites(localFavorites).then((res) => {
             setFavorites(res);
         });
     },[])
 
     useEffect(() => {
-        if(favorites.length > 0 && favorites.length !== localFavorites.length) {
-            //Add new favorite city names to localstorage
-            setLocalFavorites([...localFavorites, favorites[favorites.length-1].name]); 
-            return
+        if(favorites.length !== localFavorites.length) {
+            if(favorites.length > localFavorites.length) {
+                //Add new favorite city names to localstorage
+                const lastCity = favorites[favorites.length-1].name;
+                setLocalFavorites([...localFavorites, lastCity]); 
+                return
+            }
+            //Remove a favorite
+            setLocalFavorites(compareLocalToContext(localFavorites, favorites))
         }
     }, [favorites])
 

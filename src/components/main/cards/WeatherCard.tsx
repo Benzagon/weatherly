@@ -4,6 +4,7 @@ import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useGlobalContext } from '@/app/Context/store';
 import { useEffect, useState } from 'react';
+import { removeCity } from '@/utils/cityFunctions';
 
 interface Props {
     city: City
@@ -23,10 +24,14 @@ const WeatherCard = ({city}: Props) => {
     },[city]);
 
     const handleFavorite = (city: City) => {
-        if(!isFavorite){ // -> If doesnt already exist
+        if(!isFavorite){
             setFavorites([...favorites, city]);
             setIsFavorite(true);
-            return
+        }
+        else {
+            const deletedFavorites = favorites.filter((obj) => removeCity(city.name, obj.name));
+            setFavorites(deletedFavorites);
+            setIsFavorite(false);
         }
     }
 
