@@ -25,7 +25,6 @@ const WeatherCard = ({cityName}: Props) => {
         setLoading(true);
         fetchCity(cityName).then((res: {data: City}) => {
             setCity(res.data); 
-            console.log(res.data)
             setLoading(false);
             //Check if city is favorite
             if(favorites.find(e => e === res.data.name)){
@@ -50,12 +49,12 @@ const WeatherCard = ({cityName}: Props) => {
 
     return (
         <div className='w-80 h-fit'>
-            <Skeleton variant="rectangular" sx={{ width: 320, height:140 }} loading={loading}>
+            <Skeleton variant="rectangular" sx={{ width: 320, height:180 }} loading={loading}>
             {city && (
                 <Card sx={{ width: 320 }}>
                     <div>
                         <Typography level="title-lg">{city.name}</Typography>
-                        <Typography level="body-sm">{city.longitud + ' - ' + city.latitud}</Typography>
+                        <Typography level="body-sm">{city.description}</Typography>
                         <IconButton
                             onClick={() => {handleFavorite(city.name)}}
                             aria-label="Mark favorite city"
@@ -67,24 +66,32 @@ const WeatherCard = ({cityName}: Props) => {
                             {isFavorite ? <BookmarkAddedIcon /> : <BookmarkBorderIcon />}
                         </IconButton>
                     </div>
-                    <CardContent orientation="horizontal">
+                    <CardContent orientation="horizontal" className='flex justify-between'>
                         <div>
-                        <Typography level="body-xs">Current temperature:</Typography>
-                        <div className='flex items-center justify-start gap-4'>
-                            <Typography fontSize="xl" fontWeight="lg" className='pb-1'>
-                                {city.temperature + "°"}
-                            </Typography>
-                            <WeatherIcon desc={city.description}></WeatherIcon>
+                            <div className='flex flex-col gap-2'>
+                                <div className='flex items-center justify-start gap-4'>
+                                    <Typography fontSize="xl" fontWeight="lg">
+                                        {city.temperature + "°"}
+                                    </Typography>
+                                    <WeatherIcon desc={city.description} wind={city.wind}></WeatherIcon>
+                                </div>
+                                <div className='grid gap-0'>
+                                    <Typography level="body-sm">{`Wind: ${city.wind}km/h`}</Typography>
+                                    <Typography level="body-sm">{`Humidity: ${city.humidity}`}</Typography>
+                                </div>
+                            </div>
                         </div>
+                        <div className='grid pt-8'>
+                            <Button
+                                className='m-0'
+                                variant="solid"
+                                size="md"
+                                color="primary"
+                                sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+                            >
+                            Explore
+                            </Button>
                         </div>
-                        <Button
-                        variant="solid"
-                        size="md"
-                        color="primary"
-                        sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
-                        >
-                        Explore
-                        </Button>
                     </CardContent>
                 </Card>
                 )

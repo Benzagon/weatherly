@@ -1,12 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
-
-const top100Films = [
-    'Buenos Aires',
-    'Madrid',
-    'San Pablo',
-    'Paris'
-  ]
+import { cities } from "@/utils/cities";
 
 interface Props {
     setSearchValue: Dispatch<SetStateAction<string | null>>,
@@ -24,7 +18,7 @@ const Searchbar = ({searchValue, setSearchValue}: Props) => {
                 fullWidth={true}
                 disablePortal
                 id="combo-box-demo"
-                options={top100Films}
+                options={cities}
                 renderInput={(params) => <TextField {...params} label="Search for a city..." />}
             />
         </div>

@@ -7,26 +7,6 @@ export async function GET(req: NextRequest) {
     const apiKey = process.env.X_RapidAPI_Key;
     const apiHost = process.env.X_RapidAPI_Host;
     try {
-        /// TO NOT WASTE API CALLS
-        
-        // const response = await fetch(`https://open-weather13.p.rapidapi.com/city/${cityName}`, {
-        //   headers: {
-        //     'X-RapidAPI-Key': apiKey || '',
-        //     'X-RapidAPI-Host': apiHost || ''
-        //   },
-
-        // })
-        // const weatherData = await response.json();
-        // const cityData: City = {
-        //     name: weatherData.name,
-        //     longitud: weatherData.coord.lon,
-        //     latitud: weatherData.coord.lat,
-        //     temperature: farenhToCels(weatherData.main.temp),
-        //     description: weatherData.weather[0].main,
-        //     humidity: weatherData.main.humidity,
-        //     wind: weatherData.wind.speed
-        //   }
-        // return NextResponse.json({data: cityData});  
         const response = await fetch(`https://weatherapi-com.p.rapidapi.com/current.json?q=${cityName}`, {
           headers: {
             'X-RapidAPI-Key': apiKey || '',
