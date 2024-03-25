@@ -1,3 +1,4 @@
+export const revalidate = 600; //Revalidate data every 10 minutes
 import { farenhToCels } from "@/utils/farnheitToCelsius";
 import { NextRequest, NextResponse } from "next/server";
 
