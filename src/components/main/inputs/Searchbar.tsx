@@ -4,7 +4,8 @@ import { Dispatch, SetStateAction } from "react";
 const top100Films = [
     'Buenos Aires',
     'Madrid',
-    'San Pablo'
+    'San Pablo',
+    'Paris'
   ]
 
 interface Props {

@@ -15,61 +15,34 @@ export async function GET(req: NextRequest) {
         //   },
 
         // })
-        // const weatherData = await response.json()
-        const weatherData = {
-          "data": {
-              "coord": {
-                  "lon": 2.3488,
-                  "lat": 48.8534
-              },
-              "weather": [
-                  {
-                      "id": 800,
-                      "main": "Clear",
-                      "description": "clear sky",
-                      "icon": "01d"
-                  }
-              ],
-              "base": "stations",
-              "main": {
-                  "temp": 65.55,
-                  "feels_like": 64.44,
-                  "temp_min": 63.21,
-                  "temp_max": 69.39,
-                  "pressure": 1027,
-                  "humidity": 56
-              },
-              "visibility": 10000,
-              "wind": {
-                  "speed": 4.61,
-                  "deg": 120
-              },
-              "clouds": {
-                  "all": 0
-              },
-              "dt": 1711025116,
-              "sys": {
-                  "type": 2,
-                  "id": 2041230,
-                  "country": "FR",
-                  "sunrise": 1711000245,
-                  "sunset": 1711044273
-              },
-              "timezone": 3600,
-              "id": 2988507,
-              "name": "Paris",
-              "cod": 200
-          }
-        }
+        // const weatherData = await response.json();
+        // const cityData: City = {
+        //     name: weatherData.name,
+        //     longitud: weatherData.coord.lon,
+        //     latitud: weatherData.coord.lat,
+        //     temperature: farenhToCels(weatherData.main.temp),
+        //     description: weatherData.weather[0].main,
+        //     humidity: weatherData.main.humidity,
+        //     wind: weatherData.wind.speed
+        //   }
+        // return NextResponse.json({data: cityData});  
+        const response = await fetch(`https://weatherapi-com.p.rapidapi.com/current.json?q=${cityName}`, {
+          headers: {
+            'X-RapidAPI-Key': apiKey || '',
+            'X-RapidAPI-Host': apiHost || ''
+          },
+
+        })
+        const weatherData = await response.json();  
         const cityData: City = {
-          name: weatherData.data.name,
-          longitud: weatherData.data.coord.lon,
-          latitud: weatherData.data.coord.lat,
-          temperature: farenhToCels(weatherData.data.main.temp),
-          description: weatherData.data.weather[0].main,
-          humidity: weatherData.data.main.humidity,
-          wind: weatherData.data.wind.speed
-        }
+            name: weatherData.location.name,
+            longitud: weatherData.location.lon,
+            latitud: weatherData.location.lat,
+            temperature: farenhToCels(weatherData.current.temp_f),
+            description: weatherData.current.condition.text,
+            humidity: weatherData.current.humidity,
+            wind: weatherData.current.wind_kph
+          }
         return NextResponse.json({data: cityData});  
     } catch (error){
         console.error(error);

@@ -38,7 +38,7 @@ const WeatherCard = ({city}: Props) => {
     return (
         <div className='w-80 h-72'>
             {city && (
-                <Card sx={{ width: 320 }}>
+            <Card sx={{ width: 320 }}>
                 <div>
                     <Typography level="title-lg">{city.name}</Typography>
                     <Typography level="body-sm">{city.longitud + ' - ' + city.latitud}</Typography>
