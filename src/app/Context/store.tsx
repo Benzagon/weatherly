@@ -17,15 +17,17 @@ const GlobalContext = createContext<ContextProps>({
 export const GlobalContextProvider = ({ children }: Readonly<{children: React.ReactNode;}>) => {
     const [localFavorites, setLocalFavorites] = useLocalStorage('FAVORITE_CITIES', []);
     const [favorites, setFavorites] = useState<[] | City[]>([]);
+    const [creatingContext, setCreatingContext] = useState(true);
 
     useEffect(() => { // Mount context favorites with locally stored data
         getFavorites(localFavorites).then((res) => {
             setFavorites(res);
+            setCreatingContext(false);
         });
     },[])
 
     useEffect(() => {
-        if(favorites.length !== localFavorites.length) {
+        if(favorites.length !== localFavorites.length && !creatingContext) {
             if(favorites.length > localFavorites.length) {
                 //Add new favorite city names to localstorage
                 const lastCity = favorites[favorites.length-1].name;
