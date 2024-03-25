@@ -1,11 +1,14 @@
 import { Button, CardContent, IconButton, Skeleton, Typography } from '@mui/joy';
 import Card from '@mui/joy/Card';
-import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useGlobalContext } from '@/app/Context/store';
 import { useEffect, useState } from 'react';
 import { removeCity } from '@/utils/cityFunctions';
 import { fetchCity } from '@/lib/fetchApi';
+
+//Icons
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import WeatherIcon from './WeatherIcon';
 
 interface Props {
     cityName: string
@@ -22,6 +25,7 @@ const WeatherCard = ({cityName}: Props) => {
         setLoading(true);
         fetchCity(cityName).then((res: {data: City}) => {
             setCity(res.data); 
+            console.log(res.data)
             setLoading(false);
             //Check if city is favorite
             if(favorites.find(e => e === res.data.name)){
@@ -66,9 +70,12 @@ const WeatherCard = ({cityName}: Props) => {
                     <CardContent orientation="horizontal">
                         <div>
                         <Typography level="body-xs">Current temperature:</Typography>
-                        <Typography fontSize="xl" fontWeight="lg">
-                            {city.temperature + "°"}
-                        </Typography>
+                        <div className='flex items-center justify-start gap-4'>
+                            <Typography fontSize="xl" fontWeight="lg" className='pb-1'>
+                                {city.temperature + "°"}
+                            </Typography>
+                            <WeatherIcon desc={city.description}></WeatherIcon>
+                        </div>
                         </div>
                         <Button
                         variant="solid"
