@@ -2,6 +2,7 @@
 import WeatherCard from "./cards/WeatherCard";
 import Searchbar from "./inputs/Searchbar";
 import { useEffect, useState } from "react";
+import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 
 const Indexbody = () => {
     const [searchValue, setSearchValue] = useState<string | null>(null); // Value searched by user.
@@ -12,9 +13,15 @@ const Indexbody = () => {
     }, [searchValue]);
 
     return (
-        <div className='w-fit grid gap-6 justify-start'>
-            <Searchbar searchValue={searchValue} setSearchValue={setSearchValue}></Searchbar> 
-            {city && <WeatherCard cityName={city}></WeatherCard>}
+        <div className='w-fit grid gap-8 justify-start'>
+            <div className="flex justify-center items-center gap-2">
+                <ThunderstormIcon className="text-blue-500"></ThunderstormIcon>
+                <h1 className="text-2xl text-center font-medium">Weatherly!</h1>
+            </div>
+            <div className="grid gap-6 justify-start">
+                <Searchbar searchValue={searchValue} setSearchValue={setSearchValue}></Searchbar> 
+                {city && <WeatherCard cityName={city}></WeatherCard>}
+            </div>
         </div>
     );
 };
