@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { GlobalContextProvider } from "./Context/store";
+import Navbar from "@/components/main/Navbar";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -21,10 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} bg-[#FEFEFE]`}>
+      <body className={`${roboto.className} bg-[#FEFEFE] overflow-hidden`}>
         <AppRouterCacheProvider>
           <GlobalContextProvider>
-            {children}
+            <Navbar></Navbar>
+            <div className="pt-8">
+              {children}
+            </div>
           </GlobalContextProvider>
         </AppRouterCacheProvider>
       </body>
