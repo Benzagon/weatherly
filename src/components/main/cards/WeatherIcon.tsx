@@ -8,7 +8,17 @@ import Image from 'next/image';
 
 const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
     const cleanDesc = desc.toLocaleLowerCase().replace(/\s/g, '');
-    if(wind >= 20.0) {
+    if(cleanDesc === 'rain' || cleanDesc === 'lightrain') {
+        return (
+            <Image
+                src={Raining}
+                alt='Raining'
+                width={40}
+                unoptimized={true}
+            />
+        )
+    }
+    else if(wind >= 20.0) {
         return (
             <Image
                 src={Wind}
@@ -43,16 +53,6 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
             <Image
                 src={Cloudy}
                 alt='Cloudy'
-                width={40}
-                unoptimized={true}
-            />
-        )
-    }
-    else if(cleanDesc === 'raining') {
-        return (
-            <Image
-                src={Raining}
-                alt='Raining'
                 width={40}
                 unoptimized={true}
             />
