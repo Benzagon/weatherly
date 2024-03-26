@@ -20,6 +20,7 @@ export const GlobalContextProvider = ({ children }: Readonly<{children: React.Re
     useEffect(() => { // Mount context favorites with locally stored data
         setFavorites(localFavorites);
         setCreatingContext(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     useEffect(() => {
@@ -33,6 +34,7 @@ export const GlobalContextProvider = ({ children }: Readonly<{children: React.Re
             //Remove a favorite
             setLocalFavorites(favorites)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [favorites])
 
     return (
