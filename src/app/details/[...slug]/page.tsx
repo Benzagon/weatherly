@@ -16,14 +16,14 @@ export default async function Details({ params }: { params: {slug: [city: string
     const forecast:FiveDaysCity[] = (await fetchDetails(Number(lat), Number(lon))).formattedData;
 
     return (
-        <div className='h-screen w-screen flex flex-col items-center p-20 pt-32 gap-8 justify-start'>
+        <div className='h-screen w-screen flex flex-col items-center md:px-20 px-6 pt-32 gap-8 justify-start'>
             <div className="flex flex-col gap-2 items-center justify-start">
                 <h1 className="text-2xl text-center w-full">Right now in <span className="font-medium">{capitalizeString(city)}</span></h1>
                 <CurrentInfo cityName={city}></CurrentInfo>
             </div>
-            <div className="flex flex-col items-center justify-center gap-6">
+            <div className="flex flex-col items-center justify-center gap-6 pb-10">
                 <Typography level="h4" fontWeight='medium'>5 day Forecast</Typography>
-                <div className="flex justify-center gap-16 bg-[#fefefe] drop-shadow rounded-xl px-12 py-8">
+                <div className="grid sm:grid-cols-5 grid-cols-2 justify-center gap-16 bg-[#fefefe] drop-shadow rounded-xl px-12 py-8">
                     {forecast.map((forecast, index) => (
                         <WeekCard key={index} forecast={forecast}/>
                     ))}

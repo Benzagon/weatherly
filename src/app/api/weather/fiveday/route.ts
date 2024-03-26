@@ -9,16 +9,16 @@ export async function GET(req: NextRequest) {
     const apiKey = process.env.X_RapidAPI_Key;
     const apiHost = process.env.X_RapidAPI_OpenWeather_Host;
     try {
-        // const response = await fetch(`https://open-weather13.p.rapidapi.com/city/fivedaysforcast/${latitud}/${longitud}`, {
-        //   headers: {
-        //     'X-RapidAPI-Key': apiKey || '',
-        //     'X-RapidAPI-Host': apiHost || ''
-        //   },
+        const response = await fetch(`https://open-weather13.p.rapidapi.com/city/fivedaysforcast/${latitud}/${longitud}`, {
+          headers: {
+            'X-RapidAPI-Key': apiKey || '',
+            'X-RapidAPI-Host': apiHost || ''
+          },
 
-        // });
+        });
         
-        // const weatherData = await response.json();  
-        const weatherData = exampleResponse;
+        const weatherData = await response.json();  
+        
         const indexes = [0, 8, 16, 24, 32];
         const formattedData: FiveDaysCity[] = indexes.map((index) => {
             const forecast = weatherData.list[index];

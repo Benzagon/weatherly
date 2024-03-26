@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} bg-[#FEFEFE] overflow-hidden`}>
+      <body className={`${roboto.className} bg-[#FEFEFE] overflow-x-hidden sm:overflow-y-hidden`}>
         <AppRouterCacheProvider>
           <GlobalContextProvider>
             <Navbar></Navbar>
