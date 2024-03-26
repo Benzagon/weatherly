@@ -59,7 +59,7 @@ const WeatherIcon = ({desc, wind, width}: Props) => {
             />
         )
     }
-    else if(cleanDesc === 'cloudy') {
+    else if(cleanDesc === 'cloudy' || cleanDesc === 'clouds') {
         return (
             <Image
                 src={Cloudy}

@@ -1,11 +1,11 @@
 export const revalidate = 600; //Revalidate data every 10 minutes
-import { farenhToCels } from "@/utils/farnheitToCelsius";
+import { farenhToCels } from "@/utils/unitConvertions";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     const cityName = req.nextUrl.searchParams.get('name') as string;
     const apiKey = process.env.X_RapidAPI_Key;
-    const apiHost = process.env.X_RapidAPI_Host;
+    const apiHost = process.env.X_RapidAPI_WeatherAPI_Host;
     try {
         const response = await fetch(`https://weatherapi-com.p.rapidapi.com/current.json?q=${cityName}`, {
           headers: {

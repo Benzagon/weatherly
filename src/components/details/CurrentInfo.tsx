@@ -30,7 +30,7 @@ const CurrentInfo = ({cityName}: Props) => {
             {city &&
             <>
                 <h3 className="text-base text-gray-400">{city.description}</h3>
-                <div className="w-full flex items-center justify-center gap-8 mt-4">
+                <div className="w-full flex items-center justify-center gap-8 mt-2">
                     <WeatherIcon width={80} desc={city.description} wind={city.wind}></WeatherIcon>
                     <Typography level="h2" fontWeight='md' fontSize={'3rem'}>{city.temperature + "°"}</Typography>
                     <div className="grid gap-1">

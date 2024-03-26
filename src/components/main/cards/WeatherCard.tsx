@@ -86,7 +86,7 @@ const WeatherCard = ({cityName}: Props) => {
                         </div>
                         <div className='grid pt-8'>
                             <Button
-                                onClick={() => {router.push(`./details/${cityName}`)}}
+                                onClick={() => {router.push(`./details/${cityName}/${city.latitud}/${city.longitud}`)}}
                                 className='m-0'
                                 variant="solid"
                                 size="md"
