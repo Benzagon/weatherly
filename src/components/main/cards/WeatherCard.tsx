@@ -9,12 +9,15 @@ import { fetchCity } from '@/lib/fetchApi';
 import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import WeatherIcon from './WeatherIcon';
+import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     cityName: string
 }
 
 const WeatherCard = ({cityName}: Props) => {
+    const router = useRouter()
     const [city, setCity] = useState<City>();
     const {favorites, setFavorites} = useGlobalContext();
     const [isFavorite, setIsFavorite] = useState<boolean>();
@@ -83,6 +86,7 @@ const WeatherCard = ({cityName}: Props) => {
                         </div>
                         <div className='grid pt-8'>
                             <Button
+                                onClick={() => {router.push(`./details/${cityName}`)}}
                                 className='m-0'
                                 variant="solid"
                                 size="md"

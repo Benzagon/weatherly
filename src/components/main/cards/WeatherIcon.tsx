@@ -6,14 +6,22 @@ import Mist from '../../../../public/weatherIcons/mist.gif';
 import Wind from '../../../../public/weatherIcons/wind.gif';
 import Image from 'next/image';
 
-const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
+interface Props {
+    desc: string,
+    wind: number,
+    width?: number
+}
+
+const WeatherIcon = ({desc, wind, width}: Props) => {
+    const widthVal = width || 40;
     const cleanDesc = desc.toLocaleLowerCase().replace(/\s/g, '');
-    if(cleanDesc === 'rain' || cleanDesc === 'lightrain') {
+    if(cleanDesc === 'rain' || cleanDesc === 'lightrain' || cleanDesc === 'moderaterain') {
         return (
             <Image
                 src={Raining}
                 alt='Raining'
-                width={40}
+                width={widthVal}
+                priority
                 unoptimized={true}
             />
         )
@@ -23,7 +31,8 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
             <Image
                 src={Wind}
                 alt='Windy'
-                width={40}
+                width={widthVal}
+                priority
                 unoptimized={true}
             />
         )
@@ -33,7 +42,8 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
             <Image
                 src={PartlyCloudy}
                 alt='Partly Cloudy'
-                width={40}
+                width={widthVal}
+                priority
                 unoptimized={true}
             />
         )
@@ -43,7 +53,8 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
             <Image
                 src={Mist}
                 alt='Mist'
-                width={40}
+                width={widthVal}
+                priority
                 unoptimized={true}
             />
         )
@@ -53,7 +64,8 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
             <Image
                 src={Cloudy}
                 alt='Cloudy'
-                width={40}
+                width={widthVal}
+                priority
                 unoptimized={true}
             />
         )
@@ -62,7 +74,8 @@ const WeatherIcon = ({desc, wind}: {desc: string, wind: number}) => {
         <Image
             src={Sunny}
             alt='Sunny'
-            width={40}
+            width={widthVal}
+            priority
             unoptimized={true}
         />
     )
