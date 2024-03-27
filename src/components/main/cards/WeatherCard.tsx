@@ -36,7 +36,7 @@ const WeatherCard = ({cityName}: Props) => {
             }
             setIsFavorite(false);
         });  
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        
     }, [cityName]);
 
     const handleFavorite = (city: string) => {

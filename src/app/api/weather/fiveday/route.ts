@@ -36,22 +36,5 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({formattedData});  
     } catch (error){
         console.error(error);
-        // IF WE RUN OUT OF API CALLS
-        const weatherData = exampleResponse;
-        const indexes = [0, 8, 16, 24, 32];
-        const formattedData: FiveDaysCity[] = indexes.map((index) => {
-            const forecast = weatherData.list[index];
-            const city: FiveDaysCity = {
-                name: weatherData.city.name,
-                temperature: kelvinToCels(forecast.main.temp),
-                description: forecast.weather[0].main,
-                humidity: forecast.main.humidity,
-                wind: forecast.wind.speed,
-                date: new Date(forecast.dt_txt)
-            }
-            return city
-        })
-
-        return NextResponse.json({formattedData});  
     }
 }
